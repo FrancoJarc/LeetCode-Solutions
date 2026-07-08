@@ -4,7 +4,6 @@ WITH fq AS(
        user_id,
        event_date,
        MAX(monthly_amount) AS max_historical_amount,
-       (monthly_amount/MAX(monthly_amount)) * 100.0 as current_revenue, /**/
        DATEDIFF(MAX(event_date), MIN(event_date)) AS days_as_subscriber
     FROM subscription_events
     WHERE user_id IN (SELECT user_id FROM subscription_events WHERE event_type = "downgrade")
